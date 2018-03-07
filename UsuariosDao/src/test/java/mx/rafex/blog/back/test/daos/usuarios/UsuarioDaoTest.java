@@ -1,5 +1,6 @@
 package mx.rafex.blog.back.test.daos.usuarios;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -33,6 +34,23 @@ public class UsuarioDaoTest extends AbstractJUnit4SpringContextTests {
         for (final UsuarioDaoDto usuario : listaUsuarios) {
             System.out.print(usuario);
         }
+    }
+
+    @Test
+    public void crearUsuario() {
+        final IUsuarioDao bean = (IUsuarioDao) applicationContext.getBean("usuarioDao");
+
+        final Integer aleatorio = (int) (Math.random() * 100000);
+        final UsuarioDaoDto usuario = new UsuarioDaoDto();
+        usuario.setAlias("test" + aleatorio);
+        usuario.setCorreo("test" + aleatorio + "@r.com");
+        usuario.setContrasenya(aleatorio.toString());
+        usuario.setAcceso(new Date());
+        usuario.setModificacion(new Date());
+
+        final Boolean resultado = bean.crear(usuario);
+
+        Assert.assertTrue("Falo la creacion del usuario", resultado);
     }
 
 }

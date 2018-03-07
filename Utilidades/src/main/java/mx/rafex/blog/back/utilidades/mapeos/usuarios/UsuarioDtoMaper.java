@@ -12,9 +12,9 @@ import mx.rafex.blog.back.dtos.daos.sql.usuarios.UsuarioSqlDto;
 import mx.rafex.blog.back.dtos.daos.usuarios.UsuarioDaoDto;
 
 @Mapper
-public interface UsuariosDtoMaper {
+public interface UsuarioDtoMaper {
 
-    UsuariosDtoMaper INSTANCE = Mappers.getMapper(UsuariosDtoMaper.class);
+    UsuarioDtoMaper INSTANCE = Mappers.getMapper(UsuarioDtoMaper.class);
 
     @Mappings({ @Mapping(source = "id", target = "identificador") })
     UsuarioDaoDto convertir(UsuarioSqlDto usuario);

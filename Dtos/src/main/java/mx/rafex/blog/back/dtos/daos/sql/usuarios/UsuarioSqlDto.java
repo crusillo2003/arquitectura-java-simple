@@ -5,6 +5,7 @@ import java.util.Date;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
@@ -13,7 +14,9 @@ public class UsuarioSqlDto implements Serializable {
     private static final long serialVersionUID = -6638350426618012372L;
 
     private Integer id;
+    @NonNull
     private String alias;
+    @NonNull
     private String correo;
     private String contrasenya;
     private Date registro;
