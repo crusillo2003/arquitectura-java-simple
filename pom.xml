@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>mx.rafex.blog.back</groupId>
+	<artifactId>BackRafex</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>BackRafex</name>
+	<url>https://theworldofrafex.blog/</url>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<modules>
+		<!-- Core -->
+		<module>Dtos</module>
+		<module>Utilidades</module>
+
+		<!-- Dao's -->
+		<module>UsuariosDao</module>
+	</modules>
+</project>

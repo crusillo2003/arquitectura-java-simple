@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>mx.rafex.blog.back</groupId>
+		<artifactId>BackRafex</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>mx.rafex.blog.back.daos.usuarios</groupId>
+	<artifactId>UsuariosDao</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>UsuariosDao</name>
+	<url>https://theworldofrafex.blog/</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.8</jdk.version>
+		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+
+		<mysql-connector-java.version>5.1.39</mysql-connector-java.version>
+
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<junit.version>4.12</junit.version>
+		<org.springframework.version>4.3.14.RELEASE</org.springframework.version>
+
+		<utilidades.version>1.0-SNAPSHOT</utilidades.version>
+	</properties>
+
+	<dependencies>
+		<!-- Dependencias propias entre proyectos -->
+		<dependency>
+			<groupId>mx.rafex.blog.back.utilidades</groupId>
+			<artifactId>Utilidades</artifactId>
+			<version>${utilidades.version}</version>
+		</dependency>
+
+		<!-- Dependencias de software de terceros -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector-java.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<!-- Dependencias solo para test -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${commons-dbcp.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
