@@ -21,7 +21,7 @@ public class UsuarioDaoTest extends AbstractJUnit4SpringContextTests {
     @Test
     public void validarQueElBeanNoSeaNulo() {
         final IUsuarioDao bean = (IUsuarioDao) applicationContext.getBean("usuarioDao");
-        Assert.assertNotNull(bean);
+        Assert.assertNotNull("Error al crear el contexto y el bean es nulo", bean);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class UsuarioDaoTest extends AbstractJUnit4SpringContextTests {
         Assert.assertNotNull(listaUsuarios);
         Assert.assertFalse("Hubo un error al traer los usuarios", listaUsuarios.isEmpty());
         for (final UsuarioDaoDto usuario : listaUsuarios) {
-            System.out.print(usuario);
+            System.out.println(usuario);
         }
     }
 
@@ -49,12 +49,14 @@ public class UsuarioDaoTest extends AbstractJUnit4SpringContextTests {
     public void actualizarUsuario() {
         final IUsuarioDao bean = (IUsuarioDao) applicationContext.getBean("usuarioDao");
 
+        final UsuarioDaoDto usuarioDaoDto = insert();
+
         final Timestamp stamp = new Timestamp(System.currentTimeMillis());
         final Date date = new Date(stamp.getTime());
 
         final Integer aleatorio = (int) (Math.random() * 100000);
         final UsuarioDaoDto usuario = new UsuarioDaoDto();
-        usuario.setIdentificador(1);
+        usuario.setIdentificador(usuarioDaoDto.getIdentificador());
         usuario.setCorreo("test" + aleatorio + "@r.com");
         usuario.setAcceso(date);
         usuario.setModificacion(date);
