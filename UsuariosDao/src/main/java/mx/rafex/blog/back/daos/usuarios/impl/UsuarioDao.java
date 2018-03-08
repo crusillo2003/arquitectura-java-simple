@@ -2,6 +2,7 @@ package mx.rafex.blog.back.daos.usuarios.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,17 +19,34 @@ public class UsuarioDao implements IUsuarioDao {
     private static final Logger LOG = Logger.getLogger(UsuarioDao.class);
 
     @Autowired
-    private UsuarioSqlMaper usuarioSql;
+    private UsuarioSqlMaper usuarioSqlMaper;
 
     public List<UsuarioDaoDto> obtenerTodos() {
-        final List<UsuarioSqlDto> listaUsuarios = usuarioSql.select();
+        final List<UsuarioSqlDto> listaUsuarios = usuarioSqlMaper.select();
         return UsuarioDtoMaper.INSTANCE.convertirListaUsuarioSqlDto(listaUsuarios);
     }
 
-    public Boolean crear(final UsuarioDaoDto usuario) {
+    public UsuarioDaoDto crear(final UsuarioDaoDto usuario) {
         final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
-        final Long identificador = usuarioSql.insert(usuarioSqlDto);
-        return identificador != null ? true : false;
+        final Integer resultado = usuarioSqlMaper.insert(usuarioSqlDto);
+
+        if ((resultado != null) && BooleanUtils.toBoolean(resultado)) {
+            return UsuarioDtoMaper.INSTANCE.convertir(usuarioSqlDto);
+        }
+
+        return null;
+    }
+
+    public Boolean actualizar(final UsuarioDaoDto usuario) {
+        final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
+        final Integer resultado = usuarioSqlMaper.update(usuarioSqlDto);
+        return (resultado != null) && (resultado > 0) ? true : false;
+    }
+
+    public Boolean eliminar(final UsuarioDaoDto usuario) {
+        final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
+        final Integer resultado = usuarioSqlMaper.delete(usuarioSqlDto);
+        return (resultado != null) && (resultado > 0) ? true : false;
     }
 
 }

@@ -1,5 +1,6 @@
 package mx.rafex.blog.back.test.daos.usuarios;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -38,19 +39,59 @@ public class UsuarioDaoTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void crearUsuario() {
+        final UsuarioDaoDto usuarioDaoDto = insert();
+
+        Assert.assertNotNull("Fallo la creacion del usuario", usuarioDaoDto);
+        Assert.assertNotNull("No obtuvo el id de insert", usuarioDaoDto.getIdentificador());
+    }
+
+    @Test
+    public void actualizarUsuario() {
         final IUsuarioDao bean = (IUsuarioDao) applicationContext.getBean("usuarioDao");
+
+        final Timestamp stamp = new Timestamp(System.currentTimeMillis());
+        final Date date = new Date(stamp.getTime());
+
+        final Integer aleatorio = (int) (Math.random() * 100000);
+        final UsuarioDaoDto usuario = new UsuarioDaoDto();
+        usuario.setIdentificador(1);
+        usuario.setCorreo("test" + aleatorio + "@r.com");
+        usuario.setAcceso(date);
+        usuario.setModificacion(date);
+
+        final Boolean actualizar = bean.actualizar(usuario);
+        Assert.assertTrue("Error al actualizar", actualizar);
+
+    }
+
+    @Test
+    public void eliminarUsuario() {
+        final IUsuarioDao bean = (IUsuarioDao) applicationContext.getBean("usuarioDao");
+
+        final UsuarioDaoDto usuarioDaoDto = insert();
+
+        final Boolean eliminar = bean.eliminar(usuarioDaoDto);
+        Assert.assertTrue("Error al eliminar", eliminar);
+
+    }
+
+    private UsuarioDaoDto insert() {
+        final IUsuarioDao bean = (IUsuarioDao) applicationContext.getBean("usuarioDao");
+
+        final Timestamp stamp = new Timestamp(System.currentTimeMillis());
+        final Date date = new Date(stamp.getTime());
 
         final Integer aleatorio = (int) (Math.random() * 100000);
         final UsuarioDaoDto usuario = new UsuarioDaoDto();
         usuario.setAlias("test" + aleatorio);
         usuario.setCorreo("test" + aleatorio + "@r.com");
         usuario.setContrasenya(aleatorio.toString());
-        usuario.setAcceso(new Date());
-        usuario.setModificacion(new Date());
+        usuario.setAcceso(date);
+        usuario.setModificacion(date);
 
-        final Boolean resultado = bean.crear(usuario);
+        final UsuarioDaoDto usuarioDaoDto = bean.crear(usuario);
 
-        Assert.assertTrue("Falo la creacion del usuario", resultado);
+        return usuarioDaoDto;
     }
 
 }

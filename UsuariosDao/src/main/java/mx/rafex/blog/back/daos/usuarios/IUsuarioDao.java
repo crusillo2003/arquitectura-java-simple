@@ -6,7 +6,11 @@ import mx.rafex.blog.back.dtos.daos.usuarios.UsuarioDaoDto;
 
 public interface IUsuarioDao {
 
-    public List<UsuarioDaoDto> obtenerTodos();
+    List<UsuarioDaoDto> obtenerTodos();
 
-    public Boolean crear(UsuarioDaoDto usuario);
+    UsuarioDaoDto crear(UsuarioDaoDto usuario);
+
+    Boolean actualizar(UsuarioDaoDto usuario);
+
+    Boolean eliminar(UsuarioDaoDto usuario);
 }
