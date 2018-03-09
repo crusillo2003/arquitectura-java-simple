@@ -33,7 +33,7 @@ public class UsuarioDaoTest extends AbstractJUnit4SpringContextTests {
         Assert.assertNotNull(listaUsuarios);
         Assert.assertFalse("Hubo un error al traer los usuarios", listaUsuarios.isEmpty());
         for (final UsuarioDaoDto usuario : listaUsuarios) {
-            System.out.println(usuario);
+            System.out.println(usuario.toJson());
         }
     }
 
@@ -43,6 +43,24 @@ public class UsuarioDaoTest extends AbstractJUnit4SpringContextTests {
 
         Assert.assertNotNull("Fallo la creacion del usuario", usuarioDaoDto);
         Assert.assertNotNull("No obtuvo el id de insert", usuarioDaoDto.getIdentificador());
+        System.out.println(usuarioDaoDto.toJson());
+    }
+
+    @Test
+    public void obtenerUnUsuario() {
+        final IUsuarioDao bean = (IUsuarioDao) applicationContext.getBean("usuarioDao");
+
+        final UsuarioDaoDto usuarioDaoDto = insert();
+
+        usuarioDaoDto.setCorreo(null);
+        usuarioDaoDto.setAlias(null);
+
+        final UsuarioDaoDto obtenerUnUsuario = bean.obtenerUnUsuario(usuarioDaoDto);
+
+        Assert.assertEquals("Error al obtener un usuario", usuarioDaoDto.getIdentificador(),
+                obtenerUnUsuario.getIdentificador());
+        System.out.println(obtenerUnUsuario.toJson());
+
     }
 
     @Test

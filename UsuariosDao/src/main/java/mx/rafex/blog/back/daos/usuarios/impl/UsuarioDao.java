@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import mx.rafex.blog.back.daos.sql.mappers.UsuarioSqlMaper;
+import mx.rafex.blog.back.daos.sql.mapers.usuarios.UsuarioSqlMaper;
 import mx.rafex.blog.back.daos.usuarios.IUsuarioDao;
 import mx.rafex.blog.back.dtos.daos.sql.usuarios.UsuarioSqlDto;
 import mx.rafex.blog.back.dtos.daos.usuarios.UsuarioDaoDto;
@@ -47,6 +47,12 @@ public class UsuarioDao implements IUsuarioDao {
         final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
         final Integer resultado = usuarioSqlMaper.delete(usuarioSqlDto);
         return (resultado != null) && (resultado > 0) ? true : false;
+    }
+
+    public UsuarioDaoDto obtenerUnUsuario(final UsuarioDaoDto usuario) {
+        UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
+        usuarioSqlDto = usuarioSqlMaper.selectUnUsuario(usuarioSqlDto);
+        return UsuarioDtoMaper.INSTANCE.convertir(usuarioSqlDto);
     }
 
 }

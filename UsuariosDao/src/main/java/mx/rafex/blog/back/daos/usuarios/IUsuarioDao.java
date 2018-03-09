@@ -8,6 +8,8 @@ public interface IUsuarioDao {
 
     List<UsuarioDaoDto> obtenerTodos();
 
+    UsuarioDaoDto obtenerUnUsuario(UsuarioDaoDto usuario);
+
     UsuarioDaoDto crear(UsuarioDaoDto usuario);
 
     Boolean actualizar(UsuarioDaoDto usuario);
