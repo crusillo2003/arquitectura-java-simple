@@ -16,6 +16,7 @@
     http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
 	<context:annotation-config />
+
 	<tx:annotation-driven />
 
 	<context:component-scan base-package="mx.rafex.blog.back" />
@@ -47,9 +48,16 @@
 
 	<mybatis:scan base-package="mx.rafex.blog.back.daos.sql.mapers" />
 
-<!-- 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> -->
-<!-- 		<property name="basePackage" value="mx.rafex.blog.back.daos.sql.mapers.usuarios" /> -->
-<!-- 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" /> -->
-<!-- 	</bean> -->
+	<!-- <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> -->
+	<!-- <property name="basePackage" value="mx.rafex.blog.back.daos.sql.mapers.usuarios" 
+		/> -->
+	<!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" 
+		/> -->
+	<!-- </bean> -->
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSourceMysql" />
+	</bean>
 
 </beans>

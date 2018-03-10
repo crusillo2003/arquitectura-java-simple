@@ -6,6 +6,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import mx.rafex.blog.back.daos.sql.mapers.usuarios.UsuarioSqlMaper;
 import mx.rafex.blog.back.daos.usuarios.IUsuarioDao;
@@ -21,11 +22,13 @@ public class UsuarioDao implements IUsuarioDao {
     @Autowired
     private UsuarioSqlMaper usuarioSqlMaper;
 
+    @Transactional(readOnly = true)
     public List<UsuarioDaoDto> obtenerTodos() {
         final List<UsuarioSqlDto> listaUsuarios = usuarioSqlMaper.select();
         return UsuarioDtoMaper.INSTANCE.convertirListaUsuarioSqlDto(listaUsuarios);
     }
 
+    @Transactional
     public UsuarioDaoDto crear(final UsuarioDaoDto usuario) {
         final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
         final Integer resultado = usuarioSqlMaper.insert(usuarioSqlDto);
@@ -37,18 +40,21 @@ public class UsuarioDao implements IUsuarioDao {
         return null;
     }
 
+    @Transactional
     public Boolean actualizar(final UsuarioDaoDto usuario) {
         final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
         final Integer resultado = usuarioSqlMaper.update(usuarioSqlDto);
         return (resultado != null) && (resultado > 0) ? true : false;
     }
 
+    @Transactional
     public Boolean eliminar(final UsuarioDaoDto usuario) {
         final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
         final Integer resultado = usuarioSqlMaper.delete(usuarioSqlDto);
         return (resultado != null) && (resultado > 0) ? true : false;
     }
 
+    @Transactional(readOnly = true)
     public UsuarioDaoDto obtenerUnUsuario(final UsuarioDaoDto usuario) {
         UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
         usuarioSqlDto = usuarioSqlMaper.selectUnUsuario(usuarioSqlDto);
