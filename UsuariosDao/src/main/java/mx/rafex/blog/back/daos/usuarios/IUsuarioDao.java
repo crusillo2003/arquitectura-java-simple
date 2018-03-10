@@ -15,4 +15,6 @@ public interface IUsuarioDao {
     Boolean actualizar(UsuarioDaoDto usuario);
 
     Boolean eliminar(UsuarioDaoDto usuario);
+
+    void limpiarCache();
 }
