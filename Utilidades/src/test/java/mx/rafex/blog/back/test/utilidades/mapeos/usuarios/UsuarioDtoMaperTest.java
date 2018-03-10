@@ -1,4 +1,4 @@
-package mx.rafex.blog.back.test.utils.mapeos.usuarios;
+package mx.rafex.blog.back.test.utilidades.mapeos.usuarios;
 
 import java.util.Date;
 

@@ -3,7 +3,8 @@ package mx.rafex.blog.back.daos.usuarios.impl;
 import java.util.List;
 
 import org.apache.commons.lang3.BooleanUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -20,7 +21,7 @@ import mx.rafex.blog.back.utilidades.mapeos.usuarios.UsuarioDtoMaper;
 @Repository("usuarioDao")
 public class UsuarioDao implements IUsuarioDao {
 
-    private static final Logger LOG = Logger.getLogger(UsuarioDao.class);
+    private static final Logger LOG = LogManager.getLogger(UsuarioDao.class);
 
     @Autowired
     private UsuarioSqlMaper usuarioSqlMaper;
@@ -77,7 +78,9 @@ public class UsuarioDao implements IUsuarioDao {
     @Override
     @CacheEvict(value = "usuarios", allEntries = true)
     public void limpiarCache() {
-        LOG.debug("Se ejecuto la limpieza del cache usuario");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Se ejecuto la limpieza del cache usuario");
+        }
     }
 
 }
