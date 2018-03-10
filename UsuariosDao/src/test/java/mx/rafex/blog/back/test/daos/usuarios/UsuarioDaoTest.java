@@ -95,6 +95,14 @@ public class UsuarioDaoTest extends AbstractJUnit4SpringContextTests {
 
     }
 
+    @Test
+    public void probandoVaciadoDeCache() {
+        final IUsuarioDao bean = (IUsuarioDao) applicationContext.getBean("usuarioDao");
+
+        bean.limpiarCache();
+
+    }
+
     private UsuarioDaoDto insert() {
         final IUsuarioDao bean = (IUsuarioDao) applicationContext.getBean("usuarioDao");
 
