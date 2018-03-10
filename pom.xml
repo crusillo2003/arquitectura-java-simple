@@ -21,9 +21,9 @@
 		<module>Utilidades</module>
 
 		<!-- Dao's -->
-		<module>UsuariosDao</module>
-		
+		<module>UsuarioDaos</module>
+
 		<!-- Servicios -->
-		<module>UsuariosServicios</module>
+		<module>UsuarioServicios</module>
 	</modules>
 </project>
