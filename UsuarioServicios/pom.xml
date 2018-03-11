@@ -31,7 +31,7 @@
 		<!-- Dependencias propias entre proyectos -->
 		<dependency>
 			<groupId>mx.rafex.blog.back.daos.usuarios</groupId>
-	<artifactId>UsuarioDaos</artifactId>
+			<artifactId>UsuarioDaos</artifactId>
 			<version>${usuariosdao.version}</version>
 		</dependency>
 
