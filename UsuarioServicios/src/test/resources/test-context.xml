@@ -35,28 +35,19 @@
 		</property>
 	</bean>
 
-	<bean id="dbcpDataSource" class="org.mockito.Mockito"
-		factory-method="mock">
+	<bean id="dataSourceMysql" class="org.mockito.Mockito" factory-method="mock">
 		<constructor-arg value="org.apache.commons.dbcp2.BasicDataSource" />
 	</bean>
 
-<!-- 	<bean id="dbcpDataSource" class="org.apache.commons.dbcp2.BasicDataSource" -->
-<!-- 	destroy-method="close"> -->
-<!-- 	<property name="driverClassName" value="org.hsqldb.jdbcDriver" /> -->
-<!-- 	<property name="url" value="jdbc:hsqldb:mem:dataSource" /> -->
-<!-- 	<property name="username" value="sa" /> -->
-<!-- 	<property name="password" value="" /> -->
-<!-- 	</bean> -->
-
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dbcpDataSource" />
+		<property name="dataSource" ref="dataSourceMysql" />
 	</bean>
 
 	<mybatis:scan base-package="mx.rafex.blog.back.daos.sql.mapers" />
 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dbcpDataSource" />
+		<property name="dataSource" ref="dataSourceMysql" />
 	</bean>
 
 	<cache:annotation-driven />
@@ -70,5 +61,4 @@
 		<property name="configLocation" value="classpath:ehcache.xml" />
 		<property name="shared" value="true" />
 	</bean>
-
 </beans>

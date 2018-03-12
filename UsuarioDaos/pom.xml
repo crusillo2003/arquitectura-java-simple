@@ -22,9 +22,10 @@
 
 		<mysql-connector-java.version>5.1.39</mysql-connector-java.version>
 
-		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<dbcp2.version>2.2.0</dbcp2.version>
 		<junit.version>4.12</junit.version>
 		<org.springframework.version>4.3.14.RELEASE</org.springframework.version>
+		<mockito-core.version>2.15.0</mockito-core.version>
 
 		<utilidades.version>1.0-SNAPSHOT</utilidades.version>
 	</properties>
@@ -61,9 +62,9 @@
 
 		<!-- Dependencias solo para test -->
 		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>${commons-dbcp.version}</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>${dbcp2.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -76,6 +77,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito-core.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

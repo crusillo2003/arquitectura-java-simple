@@ -38,11 +38,11 @@ public class UsuarioDao implements IUsuarioDao {
     @CachePut(value = "usuarios")
     @Transactional
     public UsuarioDaoDto crear(final UsuarioDaoDto usuario) {
-        final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
+        final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.usuarioDaoDtoAUsuarioSqlDto(usuario);
         final Integer resultado = usuarioSqlMaper.insert(usuarioSqlDto);
 
         if ((resultado != null) && BooleanUtils.toBoolean(resultado)) {
-            return UsuarioDtoMaper.INSTANCE.convertir(usuarioSqlDto);
+            return UsuarioDtoMaper.INSTANCE.usuarioSqlDtoAUsuarioSqlDto(usuarioSqlDto);
         }
 
         return null;
@@ -52,7 +52,7 @@ public class UsuarioDao implements IUsuarioDao {
     @CachePut(value = "usuarios")
     @Transactional
     public Boolean actualizar(final UsuarioDaoDto usuario) {
-        final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
+        final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.usuarioDaoDtoAUsuarioSqlDto(usuario);
         final Integer resultado = usuarioSqlMaper.update(usuarioSqlDto);
         return (resultado != null) && (resultado > 0) ? true : false;
     }
@@ -61,7 +61,7 @@ public class UsuarioDao implements IUsuarioDao {
     @CacheEvict(value = "usuarios", key = "#usuario.identificador")
     @Transactional
     public Boolean eliminar(final UsuarioDaoDto usuario) {
-        final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
+        final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.usuarioDaoDtoAUsuarioSqlDto(usuario);
         final Integer resultado = usuarioSqlMaper.delete(usuarioSqlDto);
         return (resultado != null) && (resultado > 0) ? true : false;
     }
@@ -70,9 +70,9 @@ public class UsuarioDao implements IUsuarioDao {
     @Cacheable(value = "usuarios")
     @Transactional(readOnly = true)
     public UsuarioDaoDto obtenerUnUsuario(final UsuarioDaoDto usuario) {
-        UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.convertir(usuario);
+        UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.usuarioDaoDtoAUsuarioSqlDto(usuario);
         usuarioSqlDto = usuarioSqlMaper.selectUnUsuario(usuarioSqlDto);
-        return UsuarioDtoMaper.INSTANCE.convertir(usuarioSqlDto);
+        return UsuarioDtoMaper.INSTANCE.usuarioSqlDtoAUsuarioSqlDto(usuarioSqlDto);
     }
 
     @Override

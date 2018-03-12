@@ -22,7 +22,7 @@ public class UsuarioDtoMaperTest {
         origen.setModificacion(new Date());
         origen.setAcceso(new Date());
 
-        final UsuarioDaoDto destino = UsuarioDtoMaper.INSTANCE.convertir(origen);
+        final UsuarioDaoDto destino = UsuarioDtoMaper.INSTANCE.usuarioSqlDtoAUsuarioSqlDto(origen);
 
         Assert.assertEquals(origen.getId(), destino.getIdentificador());
         Assert.assertEquals(origen.getAlias(), destino.getAlias());
@@ -45,7 +45,7 @@ public class UsuarioDtoMaperTest {
         origen.setModificacion(new Date());
         origen.setAcceso(new Date());
 
-        final UsuarioSqlDto destino = UsuarioDtoMaper.INSTANCE.convertir(origen);
+        final UsuarioSqlDto destino = UsuarioDtoMaper.INSTANCE.usuarioDaoDtoAUsuarioSqlDto(origen);
 
         Assert.assertEquals(origen.getIdentificador(), destino.getId());
         Assert.assertEquals(origen.getAlias(), destino.getAlias());

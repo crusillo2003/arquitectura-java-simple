@@ -10,6 +10,7 @@ import org.mapstruct.factory.Mappers;
 
 import mx.rafex.blog.back.dtos.daos.sql.usuarios.UsuarioSqlDto;
 import mx.rafex.blog.back.dtos.daos.usuarios.UsuarioDaoDto;
+import mx.rafex.blog.back.dtos.servicios.usuarios.UsuarioServicioDto;
 
 @Mapper
 public interface UsuarioDtoMaper {
@@ -17,10 +18,14 @@ public interface UsuarioDtoMaper {
     UsuarioDtoMaper INSTANCE = Mappers.getMapper(UsuarioDtoMaper.class);
 
     @Mappings({ @Mapping(source = "id", target = "identificador") })
-    UsuarioDaoDto convertir(UsuarioSqlDto usuario);
+    UsuarioDaoDto usuarioSqlDtoAUsuarioSqlDto(UsuarioSqlDto usuario);
 
     @InheritInverseConfiguration
-    UsuarioSqlDto convertir(UsuarioDaoDto usuario);
+    UsuarioSqlDto usuarioDaoDtoAUsuarioSqlDto(UsuarioDaoDto usuario);
+
+    UsuarioServicioDto usuarioDaoDtoAUsuarioServicioDto(UsuarioDaoDto usuario);
+
+    UsuarioDaoDto usuarioServicioDtoAUsuarioDaoDto(UsuarioServicioDto usuario);
 
     List<UsuarioDaoDto> convertirListaUsuarioSqlDto(List<UsuarioSqlDto> usuario);
 
