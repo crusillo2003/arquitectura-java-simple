@@ -3,10 +3,9 @@ package mx.rafex.blog.back.dtos.daos.usuarios;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.google.gson.GsonBuilder;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mx.rafex.blog.back.dtos.base.JsonDto;
 
 @Data
 @NoArgsConstructor
@@ -22,8 +21,8 @@ public class UsuarioDaoDto implements Serializable {
     private Date acceso;
     private Date modificacion;
 
-    public String toJson() {
-        return new GsonBuilder().setPrettyPrinting().create().toJson(this);
+    public String aJson() {
+        return JsonDto.aJson(this);
     }
 
 }

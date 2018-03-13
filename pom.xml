@@ -25,5 +25,6 @@
 
 		<!-- Servicios -->
 		<module>UsuarioServicios</module>
+		<module>UsuarioRest</module>
 	</modules>
 </project>

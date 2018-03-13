@@ -43,7 +43,7 @@
 		<property name="dataSource" ref="dataSourceMysql" />
 	</bean>
 
-	<mybatis:scan base-package="mx.rafex.blog.back.daos.sql.mapers" />
+	<mybatis:scan base-package="mx.rafex.blog.back.daos.sql.mapeos" />
 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

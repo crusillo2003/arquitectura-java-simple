@@ -1,4 +1,4 @@
-package mx.rafex.blog.back.daos.sql.mapers.usuarios;
+package mx.rafex.blog.back.daos.sql.mapeos.usuarios;
 
 interface UsuarioConsultas {
 

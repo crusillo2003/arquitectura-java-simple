@@ -34,6 +34,8 @@
 			</list>
 		</property>
 	</bean>
+	
+<!-- 	<jee:jndi-lookup id="dataSourceMysql" jndi-name="java:/MySqlDSEjemplo1" expected-type="javax.sql.DataSource" /> -->
 
 	<bean id="dataSourceMysql" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
@@ -49,7 +51,7 @@
 		<property name="dataSource" ref="dataSourceMysql" />
 	</bean>
 
-	<mybatis:scan base-package="mx.rafex.blog.back.daos.sql.mapers" />
+	<mybatis:scan base-package="mx.rafex.blog.back.daos.sql.mapeos" />
 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

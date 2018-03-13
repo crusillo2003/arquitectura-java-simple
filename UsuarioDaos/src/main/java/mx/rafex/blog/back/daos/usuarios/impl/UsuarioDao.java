@@ -12,7 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import mx.rafex.blog.back.daos.sql.mapers.usuarios.UsuarioSqlMaper;
+import mx.rafex.blog.back.daos.sql.mapeos.usuarios.UsuarioSqlMaper;
 import mx.rafex.blog.back.daos.usuarios.IUsuarioDao;
 import mx.rafex.blog.back.dtos.daos.sql.usuarios.UsuarioSqlDto;
 import mx.rafex.blog.back.dtos.daos.usuarios.UsuarioDaoDto;

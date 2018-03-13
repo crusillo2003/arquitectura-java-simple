@@ -18,7 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import mx.rafex.blog.back.daos.sql.mapers.usuarios.UsuarioSqlMaper;
+import mx.rafex.blog.back.daos.sql.mapeos.usuarios.UsuarioSqlMaper;
 import mx.rafex.blog.back.daos.usuarios.IUsuarioDao;
 import mx.rafex.blog.back.daos.usuarios.impl.UsuarioDao;
 import mx.rafex.blog.back.dtos.daos.sql.usuarios.UsuarioSqlDto;
@@ -70,7 +70,7 @@ public class UsuarioDaoTest extends AbstractJUnit4SpringContextTests {
         Assert.assertNotNull(listaUsuarios);
         Assert.assertFalse("Hubo un error al traer los usuarios", listaUsuarios.isEmpty());
         for (final UsuarioDaoDto usuario : listaUsuarios) {
-            System.out.println(usuario.toJson());
+            System.out.println(usuario.aJson());
         }
     }
 

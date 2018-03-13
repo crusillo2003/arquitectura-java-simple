@@ -46,7 +46,7 @@ public class UsuarioDaoPruebasDeIntegracionTest extends AbstractJUnit4SpringCont
         Assert.assertNotNull(listaUsuarios);
         Assert.assertFalse("Hubo un error al traer los usuarios", listaUsuarios.isEmpty());
         for (final UsuarioDaoDto usuario : listaUsuarios) {
-            System.out.println(usuario.toJson());
+            System.out.println(usuario.aJson());
         }
     }
 
@@ -56,7 +56,7 @@ public class UsuarioDaoPruebasDeIntegracionTest extends AbstractJUnit4SpringCont
 
         Assert.assertNotNull("Fallo la creacion del usuario", usuarioDaoDto);
         Assert.assertNotNull("No obtuvo el id de insert", usuarioDaoDto.getIdentificador());
-        System.out.println(usuarioDaoDto.toJson());
+        System.out.println(usuarioDaoDto.aJson());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class UsuarioDaoPruebasDeIntegracionTest extends AbstractJUnit4SpringCont
 
         Assert.assertEquals("Error al obtener un usuario", usuarioDaoDto.getIdentificador(),
                 obtenerUnUsuario.getIdentificador());
-        System.out.println(obtenerUnUsuario.toJson());
+        System.out.println(obtenerUnUsuario.aJson());
 
     }
 

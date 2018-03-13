@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mx.rafex.blog.back.daos.sql.mapers.usuarios.UsuarioSqlMaper">
+<mapper namespace="mx.rafex.blog.back.daos.sql.mapeos.usuarios.UsuarioSqlMaper">
 
 	<select id="selectUnUsuario" parameterType="mx.rafex.blog.back.dtos.daos.sql.usuarios.UsuarioSqlDto" resultType="mx.rafex.blog.back.dtos.daos.sql.usuarios.UsuarioSqlDto">
 		SELECT * FROM 

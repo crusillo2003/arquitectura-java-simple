@@ -1,6 +1,6 @@
-package mx.rafex.blog.back.daos.sql.mapers.usuarios;
+package mx.rafex.blog.back.daos.sql.mapeos.usuarios;
 
-import static mx.rafex.blog.back.daos.sql.mapers.usuarios.UsuarioConsultas.SELECT_USUARIOS;
+import static mx.rafex.blog.back.daos.sql.mapeos.usuarios.UsuarioConsultas.SELECT_USUARIOS;
 
 import java.util.List;
 

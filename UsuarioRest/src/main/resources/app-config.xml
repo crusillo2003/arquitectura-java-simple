@@ -24,39 +24,29 @@
 
 	<context:component-scan base-package="mx.rafex.blog.back" />
 
-	<context:property-placeholder location="classpath*:test.properties" />
+	<context:property-placeholder location="classpath*:app.properties" />
 
 	<bean id="misPropiedadesAplicacion"
 		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="locations">
 			<list>
-				<value>classpath*:test.properties</value>
+				<value>classpath*:app.properties</value>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="dbcpDataSource" class="org.mockito.Mockito"
-		factory-method="mock">
-		<constructor-arg value="org.apache.commons.dbcp2.BasicDataSource" />
-	</bean>
-
-<!-- 	<bean id="dbcpDataSource" class="org.apache.commons.dbcp2.BasicDataSource" -->
-<!-- 	destroy-method="close"> -->
-<!-- 	<property name="driverClassName" value="org.hsqldb.jdbcDriver" /> -->
-<!-- 	<property name="url" value="jdbc:hsqldb:mem:dataSource" /> -->
-<!-- 	<property name="username" value="sa" /> -->
-<!-- 	<property name="password" value="" /> -->
-<!-- 	</bean> -->
+	<jee:jndi-lookup id="dataSourceMysql" jndi-name="${basededatos.jdni}"
+		expected-type="javax.sql.DataSource" />
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dbcpDataSource" />
+		<property name="dataSource" ref="dataSourceMysql" />
 	</bean>
 
 	<mybatis:scan base-package="mx.rafex.blog.back.daos.sql.mapeos" />
 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dbcpDataSource" />
+		<property name="dataSource" ref="dataSourceMysql" />
 	</bean>
 
 	<cache:annotation-driven />
@@ -70,5 +60,4 @@
 		<property name="configLocation" value="classpath:ehcache.xml" />
 		<property name="shared" value="true" />
 	</bean>
-
 </beans>

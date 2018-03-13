@@ -58,4 +58,21 @@ public class UsuarioServicioTest extends AbstractJUnit4SpringContextTests {
         Assert.assertTrue("Erro al autenticar", autenticar);
     }
 
+    @Test
+    public void autenticarUsuarioIncorrectamente() {
+        final UsuarioServicioDto usuario = new UsuarioServicioDto();
+        usuario.setAlias("rafex");
+        usuario.setContrasenya("12345");
+        usuario.setCorreo("r@gmail.com");
+        final UsuarioDaoDto usuarioDaoDto = UsuarioDtoMaper.INSTANCE.usuarioServicioDtoAUsuarioDaoDto(usuario);
+
+        final UsuarioDaoDto usuarioDaoDtoRespuesta = null;
+
+        Mockito.when(usarioDao.obtenerUnUsuario(usuarioDaoDto)).thenReturn(usuarioDaoDtoRespuesta);
+
+        final Boolean autenticar = usuarioServicio.autenticar(usuario);
+
+        Assert.assertFalse("Test login incorrecto falla", autenticar);
+    }
+
 }
