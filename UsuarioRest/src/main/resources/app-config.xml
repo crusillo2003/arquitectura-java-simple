@@ -5,18 +5,18 @@
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
 	xmlns:cache="http://www.springframework.org/schema/cache"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
     http://www.springframework.org/schema/context 
-    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
     http://www.springframework.org/schema/jee
-    http://www.springframework.org/schema/jee/spring-jee-4.0.xsd 
+    http://www.springframework.org/schema/jee/spring-jee-4.3.xsd 
     http://www.springframework.org/schema/tx 
-    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd 
     http://www.springframework.org/schema/aop 
-    http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
     http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
     http://www.springframework.org/schema/cache 
-    http://www.springframework.org/schema/cache/spring-cache.xsd">
+    http://www.springframework.org/schema/cache/spring-cache-4.3.xsd">
 
 	<context:annotation-config />
 
@@ -51,13 +51,21 @@
 
 	<cache:annotation-driven />
 
-	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-		<property name="cacheManager" ref="ehcache" />
-	</bean>
-
 	<bean id="ehcache"
 		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 		<property name="configLocation" value="classpath:ehcache.xml" />
 		<property name="shared" value="true" />
 	</bean>
+
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="ehcache" />
+	</bean>
+
+
+
+	<!-- <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" -->
+	<!-- p:cache-manager-ref="ehcache" /> -->
+	<!-- <bean id="ehcache" -->
+	<!-- class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" -->
+	<!-- p:config-location="classpath:ehcache.xml" p:shared="true" /> -->
 </beans>

@@ -10,14 +10,17 @@ public class JsonDto {
 
     public static Gson obtenerConvertidorJson(final boolean serializeNulls) {
 
-        final GsonBuilder builder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting()
-                .disableHtmlEscaping();
+        final GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
 
         if (serializeNulls) {
             builder.serializeNulls();
         }
 
         return builder.create();
+    }
+
+    public static <T> T aJson(final String json, final Class<T> clazz) {
+        return JsonDto.obtenerConvertidorJson().fromJson(json, clazz);
     }
 
     public static Gson obtenerConvertidorJson() {

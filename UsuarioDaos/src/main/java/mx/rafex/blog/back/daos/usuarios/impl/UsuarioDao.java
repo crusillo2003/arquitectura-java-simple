@@ -31,7 +31,7 @@ public class UsuarioDao implements IUsuarioDao {
     @Transactional(readOnly = true)
     public List<UsuarioDaoDto> obtenerTodos() {
         final List<UsuarioSqlDto> listaUsuarios = usuarioSqlMaper.select();
-        return UsuarioDtoMaper.INSTANCE.convertirListaUsuarioSqlDto(listaUsuarios);
+        return UsuarioDtoMaper.INSTANCE.convertirListaUsuarioSqlDtoAUsuarioDaoDto(listaUsuarios);
     }
 
     @Override

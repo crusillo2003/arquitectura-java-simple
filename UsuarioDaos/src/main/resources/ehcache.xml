@@ -4,7 +4,8 @@
 	monitoring="autodetect"
 	dynamicConfig="true">
 
-	<diskStore path="java.io.tmpdir" />
+<!-- 	<diskStore path="java.io.tmpdir" /> -->
+	<diskStore path="/tmp" />
 
 	<cache name="usuarios"
 		maxEntriesLocalHeap="10000"

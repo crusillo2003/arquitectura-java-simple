@@ -25,6 +25,7 @@
 		<log4j.version>2.10.0</log4j.version>
 		<mapstruct.version>1.2.0.Final</mapstruct.version>
 		<ehcache.version>2.10.4</ehcache.version>
+		<collections.version>4.1</collections.version>
 
 		<junit.version>4.12</junit.version>
 		<org.springframework.version>4.3.14.RELEASE</org.springframework.version>
@@ -44,6 +45,11 @@
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
 			<version>${ehcache.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>${collections.version}</version>
 		</dependency>
 
 		<dependency>

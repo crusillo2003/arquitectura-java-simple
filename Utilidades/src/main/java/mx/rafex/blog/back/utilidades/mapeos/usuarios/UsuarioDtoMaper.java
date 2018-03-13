@@ -10,6 +10,7 @@ import org.mapstruct.factory.Mappers;
 
 import mx.rafex.blog.back.dtos.daos.sql.usuarios.UsuarioSqlDto;
 import mx.rafex.blog.back.dtos.daos.usuarios.UsuarioDaoDto;
+import mx.rafex.blog.back.dtos.rest.usuarios.UsuarioRestDto;
 import mx.rafex.blog.back.dtos.servicios.usuarios.UsuarioServicioDto;
 
 @Mapper
@@ -27,8 +28,17 @@ public interface UsuarioDtoMaper {
 
     UsuarioDaoDto usuarioServicioDtoAUsuarioDaoDto(UsuarioServicioDto usuario);
 
-    List<UsuarioDaoDto> convertirListaUsuarioSqlDto(List<UsuarioSqlDto> usuario);
+    @Mapping(target = "contrasenya", ignore = true)
+    UsuarioRestDto usuarioServicioDtoAUsuarioRestDto(UsuarioServicioDto usuario);
 
-    List<UsuarioSqlDto> convertirListaUsuarioDaoDto(List<UsuarioDaoDto> usuario);
+    UsuarioServicioDto usuarioRestDtoAUsuarioServicioDto(UsuarioRestDto usuario);
+
+    List<UsuarioRestDto> convertirListaUsuarioServicioDtoAUsuarioRestDto(List<UsuarioServicioDto> usuario);
+
+    List<UsuarioDaoDto> convertirListaUsuarioSqlDtoAUsuarioDaoDto(List<UsuarioSqlDto> usuario);
+
+    List<UsuarioSqlDto> convertirListaUsuarioDaoDtoAUsuarioSqlDto(List<UsuarioDaoDto> usuario);
+
+    List<UsuarioServicioDto> convertirListaUsuarioDaoDtoAUsuarioServicioDto(List<UsuarioDaoDto> usuario);
 
 }
