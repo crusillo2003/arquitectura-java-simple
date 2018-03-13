@@ -8,6 +8,8 @@ public interface IUsuarioServicio {
 
     Boolean autenticar(UsuarioServicioDto usuario);
 
+    Boolean actualizar(UsuarioServicioDto usuario);
+
     List<UsuarioServicioDto> todosLosUsuarios();
 
 }

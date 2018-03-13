@@ -1,5 +1,6 @@
 package mx.rafex.blog.back.servicios.usuarios.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -27,8 +28,23 @@ public class UsuarioServicio implements IUsuarioServicio {
         UsuarioDaoDto usuarioDaoDto = UsuarioDtoMaper.INSTANCE.usuarioServicioDtoAUsuarioDaoDto(usuario);
         usuarioDaoDto = usuarioDao.obtenerUnUsuario(usuarioDaoDto);
         LOG.debug("Resultado Dao: " + usuarioDaoDto);
-        return (usuarioDaoDto != null) && (usuarioDaoDto.getIdentificador() != null)
-                && (usuarioDaoDto.getIdentificador() > 0) ? true : false;
+
+        if ((usuarioDaoDto != null) && (usuarioDaoDto.getIdentificador() != null)
+                && (usuarioDaoDto.getIdentificador() > 0)) {
+
+            usuarioDaoDto.setAcceso(new Date());
+            final Boolean actualizar = usuarioDao.actualizar(usuarioDaoDto);
+
+            if (!actualizar) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Error al actualizar la fecha de acceso");
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -40,6 +56,13 @@ public class UsuarioServicio implements IUsuarioServicio {
         }
 
         return null;
+    }
+
+    @Override
+    public Boolean actualizar(final UsuarioServicioDto usuario) {
+        final UsuarioDaoDto usuarioDaoDto = UsuarioDtoMaper.INSTANCE.usuarioServicioDtoAUsuarioDaoDto(usuario);
+        usuarioDaoDto.setModificacion(new Date());
+        return usuarioDao.actualizar(usuarioDaoDto);
     }
 
 }

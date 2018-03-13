@@ -53,6 +53,7 @@ public class UsuarioDao implements IUsuarioDao {
     @Transactional
     public Boolean actualizar(final UsuarioDaoDto usuario) {
         final UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.usuarioDaoDtoAUsuarioSqlDto(usuario);
+        LOG.debug(usuarioSqlDto);
         final Integer resultado = usuarioSqlMaper.update(usuarioSqlDto);
         return (resultado != null) && (resultado > 0) ? true : false;
     }

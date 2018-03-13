@@ -10,7 +10,8 @@
 			<if test="id != null">id=#{id,jdbcType=INTEGER}</if>
 			<if test="alias != null"> AND alias=#{alias,jdbcType=VARCHAR}</if>
 			<if test="correo != null"> AND correo=#{correo,jdbcType=VARCHAR}</if>
-			AND contrasenya=PASSWORD(#{contrasenya,jdbcType=VARCHAR})
+			<if test="contrasenya != null"> AND contrasenya=PASSWORD(#{contrasenya,jdbcType=VARCHAR})</if>
+			
 		</where>
 	</select>
 
@@ -39,9 +40,9 @@
 		<set>
 			<if test="alias != null">alias=#{alias,jdbcType=VARCHAR},</if>
 			<if test="correo != null">correo=#{correo,jdbcType=VARCHAR},</if>
-			<if test="contrasenya != null">contrasenya=#{contrasenya,jdbcType=VARCHAR},</if>
-			<if test="acceso != null">acceso=#{acceso,jdbcType=TIMESTAMP},
-			</if><if test="modificacion != null">modificacion=#{modificacion,jdbcType=TIMESTAMP}</if>
+			<if test="contrasenya != null">contrasenya=PASSWORD(#{contrasenya,jdbcType=VARCHAR}),</if>
+			<if test="acceso != null">acceso=#{acceso,jdbcType=TIMESTAMP},</if>
+			<if test="modificacion != null">modificacion=#{modificacion,jdbcType=TIMESTAMP}</if>
 		</set>  
 		where id=#{id,jdbcType=INTEGER}
 	</update>
