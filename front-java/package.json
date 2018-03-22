@@ -1,0 +1,12 @@
+{
+  "name": "front-java",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serv": "gulp connect"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
