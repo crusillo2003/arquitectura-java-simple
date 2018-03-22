@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serv": "gulp"
+    "default": "gulp",
+    "serv": "gulp serv"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,8 @@
     "gulp-connect": "^5.5.0",
     "gulp-htmlmin": "^4.0.0",
     "gulp-pug": "^3.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
     "pump": "^3.0.0",

@@ -1,10 +1,13 @@
 doctype html  
 html(lang='en')  
+block vars
+  - var title='que pedooooo'
   head
-    title Pug test
+    title #{title}
+    link(rel='stylesheet' href='css/main.min.css')
   body
     h1 Pug Examples
     div#container
     p Cool Pug example!
-    script(src='js/vendors.js')
-    script(src='js/bundle.js')
+    script(type='text/javascript' src='js/vendors.min.js')
+    script(type='text/javascript' src='js/bundle.min.js')

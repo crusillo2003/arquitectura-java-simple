@@ -8,6 +8,8 @@ var pump = require('pump');
 var pug = require('gulp-pug');
 var htmlmin = require('gulp-htmlmin');
 var uglify = require('gulp-uglify');
+var sass = require('gulp-sass');
+var rename = require('gulp-rename');
 
 var dependencies = ['react', 'react-dom'];
 
@@ -18,6 +20,21 @@ gulp.task('server', function() {
         base: 'http://localhost',
         livereload: true
     });
+});
+
+gulp.task('sass', function () {
+  return gulp.src('./sass/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./dist/css/'));
+});
+
+gulp.task('sassMinify', function () {
+    return gulp.src('./sass/*.scss')
+        .pipe(sass({
+            outputStyle: 'compressed'
+        }))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest('./web/css/'));
 });
 
 gulp.task('views', function buildHTML() {
@@ -33,6 +50,7 @@ gulp.task('compress', function (cb) {
   pump([
         gulp.src('./dist/js/*.js'),
         uglify(),
+        rename({suffix: '.min'}),
         gulp.dest('./web/js/')
     ],
     cb
@@ -56,11 +74,14 @@ gulp.task('deploy', function (){
 gulp.task('watch', function () {
 	gulp.watch(['./app/*.js'], ['scripts']);
     gulp.watch(['./views/*.pug'], ['views']);
-    gulp.watch(['./html/*.html'], ['minify']);
+    gulp.watch(['./sass/*.scss'], ['sass']);
+    gulp.watch(['./dist/*.html'], ['minify']);
     gulp.watch(['./dist/js/*.js'], ['compress']);
+    gulp.watch(['./sass/*.scss'], ['sassMinify']);
 });
 
-gulp.task('default', ['scripts','views','minify','compress','watch','server']);
+gulp.task('default', ['scripts','sass','views','minify','compress','sassMinify','watch','server']);
+gulp.task('serv', ['watch','server']);
 
 var scriptsCount = 0;
 
