@@ -71,6 +71,7 @@ public class UsuarioDao implements IUsuarioDao {
     @Cacheable(value = "usuarios")
     @Transactional(readOnly = true)
     public UsuarioDaoDto obtenerUnUsuario(final UsuarioDaoDto usuario) {
+        LOG.debug("Obtener usuario: UsuarioDaoDto: " + usuario);
         UsuarioSqlDto usuarioSqlDto = UsuarioDtoMaper.INSTANCE.usuarioDaoDtoAUsuarioSqlDto(usuario);
         usuarioSqlDto = usuarioSqlMaper.selectUnUsuario(usuarioSqlDto);
         return UsuarioDtoMaper.INSTANCE.usuarioSqlDtoAUsuarioSqlDto(usuarioSqlDto);

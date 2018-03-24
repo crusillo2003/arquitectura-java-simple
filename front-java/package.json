@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "default": "gulp",
-    "serv": "gulp serv"
+    "serv": "gulp servPro",
+    "servDev": "gulp servDev"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,7 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }

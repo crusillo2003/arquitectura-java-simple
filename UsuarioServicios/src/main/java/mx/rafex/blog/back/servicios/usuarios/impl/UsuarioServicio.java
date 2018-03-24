@@ -25,6 +25,7 @@ public class UsuarioServicio implements IUsuarioServicio {
 
     @Override
     public Boolean autenticar(final UsuarioServicioDto usuario) {
+        LOG.debug("autenticar: " + usuario);
         UsuarioDaoDto usuarioDaoDto = UsuarioDtoMaper.INSTANCE.usuarioServicioDtoAUsuarioDaoDto(usuario);
         usuarioDaoDto = usuarioDao.obtenerUnUsuario(usuarioDaoDto);
         LOG.debug("Resultado Dao: " + usuarioDaoDto);
@@ -32,8 +33,10 @@ public class UsuarioServicio implements IUsuarioServicio {
         if ((usuarioDaoDto != null) && (usuarioDaoDto.getIdentificador() != null)
                 && (usuarioDaoDto.getIdentificador() > 0)) {
 
-            usuarioDaoDto.setAcceso(new Date());
-            final Boolean actualizar = usuarioDao.actualizar(usuarioDaoDto);
+            final UsuarioDaoDto usuarioDaoDtoTmp = new UsuarioDaoDto();
+            usuarioDaoDtoTmp.setIdentificador(usuarioDaoDto.getIdentificador());
+            usuarioDaoDtoTmp.setAcceso(new Date());
+            final Boolean actualizar = usuarioDao.actualizar(usuarioDaoDtoTmp);
 
             if (!actualizar) {
                 if (LOG.isDebugEnabled()) {
@@ -63,6 +66,11 @@ public class UsuarioServicio implements IUsuarioServicio {
         final UsuarioDaoDto usuarioDaoDto = UsuarioDtoMaper.INSTANCE.usuarioServicioDtoAUsuarioDaoDto(usuario);
         usuarioDaoDto.setModificacion(new Date());
         return usuarioDao.actualizar(usuarioDaoDto);
+    }
+
+    @Override
+    public void limpiarCache() {
+        usuarioDao.limpiarCache();
     }
 
 }

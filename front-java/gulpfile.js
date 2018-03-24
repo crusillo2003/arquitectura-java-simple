@@ -11,14 +11,25 @@ var uglify = require('gulp-uglify');
 var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 
-var dependencies = ['react', 'react-dom'];
+var dependencies = ['react', 'react-dom','axios'];
 
-gulp.task('server', function() {
+gulp.task('serverDev', function() {
+    connect.server({
+        root: ['./dist/'],
+        port: 3001,
+        base: 'http://localhost',
+        livereload: true,
+        debug: true
+    });
+});
+
+gulp.task('serverPro', function() {
     connect.server({
         root: ['./web/'],
-        port: 3000,
+        port: 3001,
         base: 'http://localhost',
-        livereload: true
+        livereload: true,
+        debug: true
     });
 });
 
@@ -71,7 +82,13 @@ gulp.task('deploy', function (){
 	bundleApp(true);
 });
 
-gulp.task('watch', function () {
+gulp.task('watchDev', function () {
+	gulp.watch(['./app/*.js'], ['scripts']);
+    gulp.watch(['./views/*.pug'], ['views']);
+    gulp.watch(['./sass/*.scss'], ['sass']);
+});
+
+gulp.task('watchAll', function () {
 	gulp.watch(['./app/*.js'], ['scripts']);
     gulp.watch(['./views/*.pug'], ['views']);
     gulp.watch(['./sass/*.scss'], ['sass']);
@@ -80,8 +97,9 @@ gulp.task('watch', function () {
     gulp.watch(['./sass/*.scss'], ['sassMinify']);
 });
 
-gulp.task('default', ['scripts','sass','views','minify','compress','sassMinify','watch','server']);
-gulp.task('serv', ['watch','server']);
+gulp.task('default', ['scripts','sass','views','minify','compress','sassMinify','watchAll','serverPro']);
+gulp.task('servPro', ['watchAll','serverPro']);
+gulp.task('servDev', ['watchDev','serverDev']);
 
 var scriptsCount = 0;
 

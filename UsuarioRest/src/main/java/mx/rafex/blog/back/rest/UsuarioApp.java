@@ -3,6 +3,7 @@ package mx.rafex.blog.back.rest;
 import static spark.Spark.after;
 import static spark.Spark.before;
 import static spark.Spark.get;
+import static spark.Spark.options;
 
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ public class UsuarioApp implements SparkApplication {
     public void init() {
         final IUsuarioRest usuarioRest = (IUsuarioRest) context.getBean("usuarioRest");
 
+        enableCORS("*", "*", "*");
         beforeServer();
         get("/hello", (request, response) -> new ResultResponse.Builder().code(200)
                 .message("Works!! " + UUID.randomUUID().toString()).build());
@@ -45,17 +47,45 @@ public class UsuarioApp implements SparkApplication {
 
     private void beforeServer() {
         before((request, response) -> {
-            if (LOG.isInfoEnabled()) {
-                LOG.info(requestInfoToString(request));
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(requestInfoToString(request));
             }
+        });
+    }
+
+    // Enables CORS on requests. This method is an initialization method and should
+    // be called once.
+    private void enableCORS(final String origin, final String methods, final String headers) {
+
+        options("/*", (request, response) -> {
+
+            final String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+            if (accessControlRequestHeaders != null) {
+                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+            }
+
+            final String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+            if (accessControlRequestMethod != null) {
+                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+            }
+
+            return "OK";
+        });
+
+        before((request, response) -> {
+            response.header("Access-Control-Allow-Origin", origin);
+            response.header("Access-Control-Request-Method", methods);
+            response.header("Access-Control-Allow-Headers", headers);
+            // Note: this may or may not be necessary in your particular application
+            // response.type("application/json");
         });
     }
 
     private void afterServer() {
         after((request, response) -> {
             response.header("Content-Encoding", "gzip");
-            if (LOG.isInfoEnabled()) {
-                LOG.info(responseInfoToString(response));
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(responseInfoToString(response));
             }
         });
     }
@@ -69,7 +99,7 @@ public class UsuarioApp implements SparkApplication {
         sb.append("\n");
         sb.append("Status: " + response.status());
         sb.append("\n");
-        sb.append("Body. " + response.body());
+        sb.append("Body. " + response.toString());
         sb.append("\n");
         sb.append("]");
         return sb.toString();
@@ -83,7 +113,12 @@ public class UsuarioApp implements SparkApplication {
         sb.append("\n");
         sb.append("UUID: " + uuid.toString());
         sb.append("\n");
-        sb.append("Headers: " + request.headers());
+        sb.append("Headers: [\n");
+        for (final String header : request.headers()) {
+            sb.append(" Header: [ " + header);
+            sb.append(": " + request.headers(header) + " ]\n");
+        }
+        sb.append("]");
         sb.append("Method: " + request.requestMethod());
         sb.append("\n");
         sb.append("URL: " + request.url());
@@ -91,6 +126,7 @@ public class UsuarioApp implements SparkApplication {
         sb.append("Body. " + request.body());
         sb.append("\n");
         sb.append("]");
+
         return sb.toString();
     }
 

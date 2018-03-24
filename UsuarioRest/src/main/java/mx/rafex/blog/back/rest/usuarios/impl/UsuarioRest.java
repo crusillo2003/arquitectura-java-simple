@@ -43,7 +43,8 @@ public class UsuarioRest implements IUsuarioRest {
                         (request, response) -> new ResultResponse.Builder().code(200).message("Funcionando").build());
                 post("/usuarios/autenticar", CONTENT_TYPE, (request, response) -> autenticacion(request, response));
                 get("/usuarios", CONTENT_TYPE, (request, response) -> todosLosUsuarios(request, response));
-                put("/usuario", CONTENT_TYPE, (request, response) -> "en contruccion");
+                put("/usuarios", CONTENT_TYPE, (request, response) -> "en contruccion");
+                get("/usuarios/clear", CONTENT_TYPE, (request, response) -> limpiarCache(request, response));
             });
         });
 
@@ -59,6 +60,15 @@ public class UsuarioRest implements IUsuarioRest {
         }
     }
 
+    private ResultResponse limpiarCache(final Request request, final Response response) {
+        validarContentType(request, response);
+
+        usuarioServicio.limpiarCache();
+        response.type(CONTENT_TYPE);
+        return new ResultResponse.Builder().code(200).message("Cache limpio").build();
+
+    }
+
     private ResultResponse autenticacion(final Request request, final Response response) {
         validarContentType(request, response);
         final UsuarioRestDto usuario = JsonDto.aJson(request.body(), UsuarioRestDto.class);
@@ -66,6 +76,7 @@ public class UsuarioRest implements IUsuarioRest {
                 .usuarioRestDtoAUsuarioServicioDto(usuario);
         final Boolean autenticar = usuarioServicio.autenticar(usuarioServicioDto);
 
+        response.type(CONTENT_TYPE);
         if (autenticar) {
             return new ResultResponse.Builder().build();
         }
@@ -79,6 +90,7 @@ public class UsuarioRest implements IUsuarioRest {
 
         final List<UsuarioServicioDto> todosLosUsuarios = usuarioServicio.todosLosUsuarios();
 
+        response.type(CONTENT_TYPE);
         if (CollectionUtils.isNotEmpty(todosLosUsuarios)) {
             return new ResultResponse.Builder()
                     .object(UsuarioDtoMaper.INSTANCE.convertirListaUsuarioServicioDtoAUsuarioRestDto(todosLosUsuarios))

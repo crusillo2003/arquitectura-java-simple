@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import HelloWorld from './HelloWorld';
+import LoginForm from './LoginForm'
 
 ReactDOM.render(
-  <HelloWorld />,
-  document.getElementById('container')
+  <LoginForm />,
+  document.getElementById('login')
 );

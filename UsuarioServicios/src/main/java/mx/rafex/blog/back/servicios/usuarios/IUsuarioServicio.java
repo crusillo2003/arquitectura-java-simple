@@ -12,4 +12,6 @@ public interface IUsuarioServicio {
 
     List<UsuarioServicioDto> todosLosUsuarios();
 
+    void limpiarCache();
+
 }
