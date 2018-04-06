@@ -6,8 +6,7 @@ class LoginForm extends React.Component {
         super(props);
         this.state = {
             usuario: '',
-            contrasenya: '',
-            login: false
+            contrasenya: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -32,23 +31,18 @@ class LoginForm extends React.Component {
                 'Content-Type': 'application/json'
             }
         });
-        var quePaso = false;
+
         promiseResult.then(function(result) {
             console.log(result);
             if (result.status === 200) {
                 const data = result.data;
                 alert('Login: ' + data.message);
-                this.setState({login: true});
-                quePaso = true;
             }
         });
-        console.log(quePaso);
 
         promiseResult.catch(function(error) {
             console.log(error);
             alert("Error al autenticar");
-            quePaso = true;
-            console.log(quePaso);
         });
 
         event.preventDefault();
@@ -61,12 +55,6 @@ class LoginForm extends React.Component {
                 <input type="password" placeholder="Contraseña..." name="contrasenya" value={this.state.contrasenya} onChange={this.handleChange}/><br/>
                 <input type="submit" value="Iniciar Sesión"/>
             </form>
-            <div style={{
-                    display: (
-                        this.state.login
-                        ? 'inline'
-                        : 'none')
-                }}>This is visible</div>
         </div>);
     }
 }
