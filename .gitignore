@@ -22,7 +22,6 @@
 hs_err_pid*
 
 bin/
-
 target/
 
 # Eclipse
@@ -34,5 +33,3 @@ target/
 # STS (Spring Tool Suite)
 .springBeans
 
-
-front-java/web/
