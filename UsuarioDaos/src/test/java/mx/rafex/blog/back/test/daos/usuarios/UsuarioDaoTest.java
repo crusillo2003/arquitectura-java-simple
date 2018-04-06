@@ -49,7 +49,7 @@ public class UsuarioDaoTest extends AbstractJUnit4SpringContextTests {
     public void obtenerTodosLosUsuarios() throws ParseException {
 
         final List<UsuarioSqlDto> listaUsuariosMock = new ArrayList<UsuarioSqlDto>();
-        final UsuarioSqlDto u = new UsuarioSqlDto();
+        UsuarioSqlDto u = new UsuarioSqlDto();
 
         final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -57,6 +57,15 @@ public class UsuarioDaoTest extends AbstractJUnit4SpringContextTests {
         u.setAlias("rafex");
         u.setContrasenya("123");
         u.setCorreo("pepe.loc@gmail.com");
+        u.setModificacion(sdf.parse("21/05/2018"));
+        u.setRegistro(sdf.parse("21/12/2012"));
+        u.setAcceso(new Date());
+        listaUsuariosMock.add(u);
+        u = new UsuarioSqlDto();
+        u.setId(2);
+        u.setAlias("2rafex");
+        u.setContrasenya("2123");
+        u.setCorreo("2pepe.loc@gmail.com");
         u.setModificacion(sdf.parse("21/05/2018"));
         u.setRegistro(sdf.parse("21/12/2012"));
         u.setAcceso(new Date());

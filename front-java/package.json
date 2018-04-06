@@ -9,7 +9,7 @@
     "servDev": "gulp servDev"
   },
   "keywords": [],
-  "author": "",
+  "author": "@rafex",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
