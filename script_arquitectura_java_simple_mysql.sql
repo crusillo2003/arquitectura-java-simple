@@ -16,4 +16,14 @@ CREATE TABLE `Usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 COLLATE=utf8_general_ci ;
 
-INSERT INTO ejemplo_java_1.Usuarios (alias,correo,contrasenya) VALUES('rafexone','rafex.dev@gmail.com',PASSWORD('rulo321'));
+INSERT INTO ejemplo_java_1.Usuarios (alias,correo,contrasenya) VALUES('rulo','r2@gmail.com',PASSWORD('rulo321'));
+
+
+CREATE USER 'rafex'@'%' ;
+UPDATE mysql.user SET Password=PASSWORD('rafex123') WHERE User='rafex' AND Host='%' ;
+GRANT Insert ON ejemplo_java_1.Usuarios TO 'rafex'@'%' ;
+GRANT Delete ON ejemplo_java_1.Usuarios TO 'rafex'@'%' ;
+GRANT Select ON ejemplo_java_1.Usuarios TO 'rafex'@'%' ;
+GRANT Trigger ON ejemplo_java_1.Usuarios TO 'rafex'@'%' ;
+GRANT Update ON ejemplo_java_1.Usuarios TO 'rafex'@'%' ;
+FLUSH PRIVILEGES;
